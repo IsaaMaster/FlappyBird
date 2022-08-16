@@ -2,6 +2,30 @@ from tkinter import Tk, Canvas
 from random import randint
 import time
 
+def main():
+    #main iteration
+    while not gameOver:
+
+        #update positions
+        for obt in obts: obt.move()
+        for cloud in clouds: cloud.move()
+        
+        fall(); day(); checkLoss() #game features
+        
+        window.update() #repacks the canvas
+        time.sleep(gameStep) #waits for gameStep seconds
+
+    #new highscore update,  w=write to file
+    #file = open("highscore.txt", "w")
+    #file.write(str(max(score, highScore))); file.close() #need to close file
+
+    #end game stuff
+    c.configure(bg=backgroundColor)
+    c.create_text((canvasWidth/2, canvasHeight/2), text = "Game Over, your score is: " + str(score) , font=100) 
+    window.update() 
+    time.sleep(4)
+
+
 window = Tk()
 window.geometry("800x500") #WidthxHeight
 window.configure(background = "black")
@@ -117,7 +141,9 @@ def flap(event):
   if not gameOver:
     dotCoords = c.coords(dot)#get coords
     c.coords(dot, dotCoords[0], dotCoords[1] - flapHeight, dotCoords[2], dotCoords[3] - flapHeight)#change coords
+
 window.bind("<space>", flap)
+
 
 
 #makes ball fall
@@ -153,24 +179,4 @@ def day():
 
     
 
-#main iteration
-while not gameOver:
-
-  #update positions
-  for obt in obts: obt.move()
-  for cloud in clouds: cloud.move()
-  
-  fall(); day(); checkLoss() #game features
-  
-  window.update() #repacks the canvas
-  time.sleep(gameStep) #waits for gameStep seconds
-
-#new highscore update,  w=write to file
-#file = open("highscore.txt", "w")
-#file.write(str(max(score, highScore))); file.close() #need to close file
-
-#end game stuff
-c.configure(bg=backgroundColor)
-c.create_text((canvasWidth/2, canvasHeight/2), text = "Game Over, your score is: " + str(score) , font=100) 
-window.update() 
-time.sleep(4)
+main()
