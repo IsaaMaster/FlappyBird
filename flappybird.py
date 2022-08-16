@@ -1,7 +1,3 @@
-from tkinter import Tk, Canvas
-from random import randint
-import time
-
 def main():
     #main iteration
     while not gameOver:
@@ -24,6 +20,10 @@ def main():
     c.create_text((canvasWidth/2, canvasHeight/2), text = "Game Over, your score is: " + str(score) , font=100) 
     window.update() 
     time.sleep(4)
+
+from tkinter import Tk, Canvas
+from random import randint
+import time
 
 
 window = Tk()
